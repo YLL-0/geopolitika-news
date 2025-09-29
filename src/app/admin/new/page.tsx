@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/app/utils/supabaseClient';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function NewArticle() {
   const [title, setTitle] = useState('');
@@ -18,7 +19,7 @@ export default function NewArticle() {
 
   useEffect(() => {
     checkUser();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const checkUser = async () => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -93,7 +94,7 @@ export default function NewArticle() {
       } else {
         router.push('/admin');
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);
@@ -193,15 +194,17 @@ export default function NewArticle() {
                 className="mt-1 block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 dark:file:bg-indigo-900/20 dark:file:text-indigo-400"
                 onChange={handleImageChange}
               />
-              {imagePreview && (
-                <div className="mt-2">
-                  <img
-                    src={imagePreview}
-                    alt="Preview"
-                    className="h-32 w-32 object-cover rounded-md"
-                  />
-                </div>
-              )}
+               {imagePreview && (
+                 <div className="mt-2">
+                   <Image
+                     src={imagePreview}
+                     alt="Preview"
+                     width={128}
+                     height={128}
+                     className="h-32 w-32 object-cover rounded-md"
+                   />
+                 </div>
+               )}
             </div>
 
             {/* Content */}

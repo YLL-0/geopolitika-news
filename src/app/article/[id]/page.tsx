@@ -23,7 +23,7 @@ export default function ArticlePage({ params }: { params: Promise<{ id: string }
 
   useEffect(() => {
     fetchArticle();
-  }, [resolvedParams.id]);
+  }, [resolvedParams.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchArticle = async () => {
     try {
@@ -38,7 +38,7 @@ export default function ArticlePage({ params }: { params: Promise<{ id: string }
       } else {
         setArticle(data);
       }
-    } catch (error) {
+    } catch {
       setError('An error occurred while fetching the article');
     } finally {
       setLoading(false);
@@ -61,7 +61,7 @@ export default function ArticlePage({ params }: { params: Promise<{ id: string }
             Article Not Found
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-            The article you're looking for doesn't exist.
+            The article you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link
             href="/"

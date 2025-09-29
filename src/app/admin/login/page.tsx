@@ -18,7 +18,7 @@ export default function AdminLogin() {
 
     try {
       // Use username as email for Supabase Auth
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email: username,
         password: password,
       });
@@ -29,7 +29,7 @@ export default function AdminLogin() {
         // Redirect to admin panel on success
         router.push('/admin');
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);
