@@ -18,7 +18,7 @@ interface Article {
 export default function AdminPanel() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<{ email: string } | null>(null);
+  const [user, setUser] = useState<{ email?: string } | null>(null);
   const router = useRouter();
 
   useEffect(() => {
